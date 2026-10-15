@@ -1,8 +1,14 @@
 # Meme'd Campaign Payout Tracker
 
-A full-stack web application that connects brands and content creators through social media campaigns with milestone-based payouts. Brands can create campaigns, manage budgets, and track spending, while creators can join campaigns, submit post links, and earn money based on their post views.
+A full-stack campaign management platform that connects brands with content creators through milestone-based payouts. Brands can launch Instagram and YouTube campaigns, manage budgets, and track creator performance. Creators can discover available campaigns, submit content links, and earn payouts based on their post views.
 
-## Features
+## 🚀 Live Demo
+
+- **Frontend:** https://memed-campaign-payout-tracker-six.vercel.app/
+- **Backend API:** https://memed-payout-api-jgot.onrender.com
+- **GitHub Repository:** https://github.com/bala-codes11/memed-campaign-payout-tracker
+
+## ✨ Features
 
 ### Authentication
 - User registration and login
@@ -10,15 +16,15 @@ A full-stack web application that connects brands and content creators through s
 - Role-based access for brands and creators
 
 ### Brand Dashboard
-- Create campaigns for Instagram and YouTube
-- Define view milestones and corresponding payouts
-- Track campaign budgets, total spending, and remaining balances
-- View campaign submissions and creator performance
+- Create Instagram and YouTube campaigns
+- Configure view milestones and payout amounts
+- Track total campaign budgets, spending, and remaining balances
+- Monitor campaign status and payout targets
 
 ### Creator Dashboard
 - Browse live campaigns with available budgets
-- Submit Instagram and YouTube post links
-- Track post views and earnings
+- Submit public Instagram and YouTube post URLs
+- Track submission views and earnings
 - View submission and payout status
 
 ### Payout Management
@@ -26,29 +32,19 @@ A full-stack web application that connects brands and content creators through s
 - Pay only the additional amount when a higher milestone is reached
 - Prevent duplicate payments for already-paid milestones
 - Enforce campaign budget limits
-- Use database transactions for payout updates
+- Use MongoDB transactions for payout updates
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-**Frontend**
-- Next.js
-- React
-- TypeScript
-- CSS
+| Layer | Technologies |
+|---|---|
+| Frontend | Next.js, React, TypeScript |
+| Backend | Node.js, Express.js, TypeScript |
+| Database | MongoDB, Mongoose |
+| Authentication | JSON Web Tokens (JWT) |
+| Testing | Jest |
 
-**Backend**
-- Node.js
-- Express.js
-- TypeScript
-- MongoDB
-- Mongoose
-- JSON Web Tokens (JWT)
-
-**Testing**
-- Jest
-- TypeScript
-
-## Project Structure
+## 📁 Project Structure
 
 ```text
 memed-campaign-payout-tracker/
@@ -64,45 +60,41 @@ memed-campaign-payout-tracker/
 │   │   └── server.ts
 │   ├── tests/
 │   ├── .env.example
-│   ├── package.json
-│   └── tsconfig.json
+│   └── package.json
 ├── frontend/
 │   ├── public/
 │   ├── src/
 │   │   ├── app/
 │   │   └── lib/
 │   ├── .env.example
-│   ├── package.json
-│   └── tsconfig.json
+│   └── package.json
 ├── .gitignore
 └── README.md
 ```
 
-## Prerequisites
+## ⚙️ Local Setup
+
+### Prerequisites
 
 - Node.js and npm
 - MongoDB database
 - Git
 
-## Getting Started
-
-### 1. Clone the Repository
+### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/bala-codes11/memed-campaign-payout-tracker.git
 cd memed-campaign-payout-tracker
 ```
 
-Replace `YOUR_GITHUB_REPOSITORY_URL` with the URL of your GitHub repository.
-
-### 2. Configure and Run the Backend
+### 2. Configure the backend
 
 ```bash
 cd backend
 npm install
 ```
 
-Create a `.env` file using `.env.example` as a template and configure the following variables:
+Create a `.env` file using `.env.example` as a template.
 
 ```env
 PORT=5000
@@ -110,9 +102,20 @@ MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_secure_secret
 ```
 
-Start the backend using the development script defined in `backend/package.json`.
+Start the backend in development mode:
 
-### 3. Configure and Run the Frontend
+```bash
+npm run dev
+```
+
+To build and run the production version locally:
+
+```bash
+npm run build
+npm start
+```
+
+### 3. Configure the frontend
 
 Open a separate terminal:
 
@@ -123,58 +126,64 @@ npm install
 
 Create a `.env.local` file using `.env.example` as a template.
 
-Configure the frontend API URL:
-
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000/api
 ```
 
-Start the frontend using the development script defined in `frontend/package.json`.
-
-### 4. Run Tests
-
-From the backend directory:
+Start the frontend:
 
 ```bash
-npm test
+npm run dev
 ```
 
-The payout service tests cover milestone calculations, incremental payouts, and budget limits.
+Open http://localhost:3000 in your browser.
 
-## API Overview
+## 🔌 API Overview
 
-| Method | Endpoint | Purpose |
+| Method | Endpoint | Description |
 |---|---|---|
 | POST | `/api/auth/signup` | Register a user |
 | POST | `/api/auth/login` | Authenticate a user |
 | POST | `/api/campaigns` | Create a campaign |
-| GET | `/api/campaigns/live` | List live campaigns with available budgets |
-| GET | `/api/campaigns/brand` | Retrieve the brand's campaigns |
-| POST | `/api/submissions` | Submit a post to a campaign |
-| GET | `/api/submissions/me` | Retrieve the creator's submissions |
-| PATCH | `/api/submissions/:id/views` | Update post views and calculate payouts |
+| GET | `/api/campaigns/live` | Get live campaigns with available budgets |
+| GET | `/api/campaigns/brand` | Get campaigns belonging to a brand |
+| POST | `/api/submissions` | Submit content to a campaign |
+| GET | `/api/submissions/me` | Get the creator's submissions |
+| PATCH | `/api/submissions/:id/views` | Update views and calculate payouts |
 
-Protected endpoints require valid authentication. Access also depends on the user's role.
+Protected endpoints require valid authentication and appropriate role permissions.
 
-## Environment Variables
+## 🧪 Testing
 
-Never commit `.env` or `.env.local` files to GitHub. Configure your own credentials using the provided example files.
+Run the backend payout service tests:
 
-## Deployment
+```bash
+cd backend
+npm test
+```
 
-**Frontend:** To be added  
-**Backend API:** To be added
+The test suite covers milestone payout calculations, incremental payouts, exhausted budgets, and budget-cap calculations.
 
-Deployment links will be added after the application is deployed.
+## 🔐 Environment Variables
 
-## Future Improvements
+Configure your own environment variables using the provided example files. Never commit `.env` or `.env.local` files or expose database credentials and JWT secrets in the repository.
+
+## ☁️ Deployment
+
+- **Frontend hosting:** Vercel
+- **Backend hosting:** Render
+- **Database:** MongoDB Atlas
+
+The frontend communicates with the deployed backend using the `NEXT_PUBLIC_API_URL` environment variable.
+
+## 🔮 Future Improvements
 
 - Automated view verification through social media APIs
 - Payout history and transaction reports
 - Campaign analytics and performance charts
 - Notifications for milestone achievements
-- Enhanced concurrency and integration testing
+- Expanded integration and concurrency testing
 
-## License
+## 📄 License
 
-No license has been selected yet.
+No license has been selected for this project yet.
